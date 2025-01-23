@@ -3,10 +3,10 @@ from wsgiref.validate import validator
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.fields.choices import SelectField
+from wtforms.fields.choices import SelectField, SelectMultipleField
 from wtforms.fields.datetime import DateTimeLocalField
 from wtforms.fields.simple import BooleanField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Optional
 from datetime import datetime as dt
 
 
@@ -22,6 +22,9 @@ class PostForm(FlaskForm):
                              ,default=dt.now())
     category = SelectField("Category",
                            choices=CATEGORIES, validators=[DataRequired()])
+    author = SelectField('Author', coerce=int, validators=[Optional()])
+    tags = SelectMultipleField('Tags', coerce=int, validators=[Optional()])
+
     submit = SubmitField("Submit")
 
 
