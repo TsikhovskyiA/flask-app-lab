@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">User Profile</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Welcome, {{ user.username }}!</h5>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+            <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
