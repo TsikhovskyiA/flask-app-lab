@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+   
+<div class="jumbotron mt-4 text-center">
+    <h1 class="display-4">Ласкаво просимо до нашого Flask-додатку!</h1>
+    <p class="lead">Досліджуйте можливості Flask: маршрутизацію, шаблонізацію та автентифікацію. Простий та ефективний інструмент для веб-розробки.</p>
+    <hr class="my-4">
+    <p>Знайдіть усе, що потрібно, у нашому зручному навігаційному меню.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Увійти</a>
+</div>
+
+<section class="about py-4">
+    <div class="container">
+        <h2 class="section-title">Про проект</h2>
+        <p>Цей проект створено для навчання роботи з Flask та експериментів із сучасними веб-технологіями. Ви отримаєте простий інтерфейс та можливість адаптувати його під свої потреби.</p>
+    </div>
+</section>
+
+<section class="contacts py-4 bg-light">
+    <div class="container">
+        <h2 class="section-title">Контакти</h2>
+        <p>Зв'яжіться з нами для додаткової інформації: <a href="mailto:example@example.com" class="contact-link">example@example.com</a>.</p>
+    </div>
+</section>
+
+{% endblock %}
