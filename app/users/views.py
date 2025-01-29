@@ -1,6 +1,11 @@
 from . import user_bp
 from flask import request, redirect, url_for, render_template, session, flash, make_response
 from datetime import timedelta, datetime
+from .models import User
+from .forms import RegistrationForm, LoginForm
+from flask_login import login_user, logout_user, login_required, current_user
+from app import db
+import email_validator
 
 users = {
     "user1": "user1",
@@ -46,22 +51,51 @@ def set_color(color):
     response.set_cookie('color_scheme', color)
     return response
 
+@user_bp.route('/users', methods=['GET'])
+@login_required
+def user_list():
+    users = User.query.all()  # Отримуємо всіх користувачів
+    return render_template('user_list.html', users=users)
+
+@user_bp.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    return render_template('account.html',user=current_user)
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get("login")
-        password = request.form.get("password")
-        
-        # Перевірка автентифікації
-        if users.get(username) == password:
-            session['username'] = username
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(form.password.data):
+            
+            login_user(user)
             flash("Success: You have logged in successfully.", "success")
-            return redirect(url_for('users.profile'))
+            return redirect(url_for("users.account"))
         else:
             flash("Error: Invalid username or password.", "danger")
-    
-    return render_template("login.html")
+    return render_template("login.html",form=form)
+
+@user_bp.route("/logout")
+def logout():
+    logout_user()
+    flash("Ви успішно вийшли з системи.", "info")
+    return redirect(url_for('users.login'))
+
+@user_bp.route('/register',methods=['GET','POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = User.hash_password(password=form.password.data)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Registration successful!', 'success')
+        return redirect(url_for('users.login'))
+    return render_template('register.html', form=form)
+
+
 @user_bp.route('/profile', methods=['GET', 'POST'])
 def profile():
     if "username" in session:
@@ -107,11 +141,6 @@ def profile():
 
 
 
-@user_bp.route('/logout')
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('users.login'))
-
 @user_bp.route('/set_cookie')
 def set_cookie():
     response = make_response('Кука встановлена')
@@ -132,3 +161,4 @@ def delete_cookie():
     response = make_response('Кука видалена')
     response.set_cookie('username', '', expires=0, path='/')  # видаляємо куку username
     return response
+

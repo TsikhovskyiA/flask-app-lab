@@ -4,17 +4,31 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center">Увійти в систему</h2>
-    <form action="" method="post" class="w-50 mx-auto">
+    <h2 class="text-center">Login</h2>
+
+   
+
+    <!-- Форма входу -->
+    <form method="POST" action="{{ url_for('users.login') }}" class="w-50 mx-auto">
+        {{ form.hidden_tag() }}
+
         <div class="mb-3">
-            <label for="login" class="form-label">Ім'я користувача</label>
-            <input type="text" class="form-control" id="login" name="login" required>
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", id="email", placeholder="Введіть ваш email") }}
+            {% for error in form.email.errors %}
+                <small class="text-danger">{{ error }}</small>
+            {% endfor %}
         </div>
+
         <div class="mb-3">
-            <label for="password" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", id="password", placeholder="Введіть ваш пароль") }}
+            {% for error in form.password.errors %}
+                <small class="text-danger">{{ error }}</small>
+            {% endfor %}
         </div>
-        <button type="submit" class="btn btn-primary">Увійти</button>
+
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Список користувачів{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Список зареєстрованих користувачів</h2>
+
+    {% if users|length == 0 %}
+        <div class="alert alert-info text-center">Наразі зареєстрованих користувачів немає.</div>
+    {% else %}
+        <p class="text-center">Загальна кількість користувачів: <strong>{{ users|length }}</strong></p>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ім'я користувача</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}
