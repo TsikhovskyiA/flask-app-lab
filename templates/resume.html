@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Резюме{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <section id="about" class="mb-5">
+    <h2 class="text-primary">Про мене</h2>
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <p>
+          Вітаю! Я – розробник програмного забезпечення, який прагне вдосконалювати світ за допомогою технологій. Маю понад 6 років досвіду 
+          у створенні інноваційних рішень для бізнесу. Моє життєве кредо – "Інновації в кожній деталі".
+        </p>
+        <p>
+          Я захоплююся впровадженням сучасних технологій, які полегшують життя та розширюють можливості. Особливу увагу приділяю 
+          розробці систем автоматизації та інтеграції штучного інтелекту в повсякденні процеси. Крім того, я активно беру участь у конференціях 
+          і підтримую молодих спеціалістів через менторство.
+        </p>
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="{{ url_for('static', filename='images/profile.png') }}" class="img-fluid rounded-circle" alt="Моє фото" width="150">
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="mb-5">
+    <h2 class="text-primary">Освіта</h2>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Національний університет "Львівська політехніка"</strong> — Бакалавр інформаційних технологій (2017-2021).  
+        Бакалаврська: дослідження алгоритмів для оптимізації розподілених обчислень.
+      </li>
+      <li class="list-group-item">
+        <strong>Кембриджський університет</strong> — Магістр штучного інтелекту (2021-2023).  
+        Магістерська робота: створення системи аналізу великих даних із використанням глибокого навчання.
+      </li>
+    </ul>
+  </section>
+
+  <section id="skills" class="mb-5">
+    <h2 class="text-primary">Навички</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li class="list-group-item">Мови програмування: Python, JavaScript, TypeScript</li>
+          <li class="list-group-item">Фреймворки: Flask, Django, Angular, Node.js</li>
+          <li class="list-group-item">Розробка API: REST, gRPC</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li class="list-group-item">Бази даних: MySQL, Firebase, Elasticsearch</li>
+          <li class="list-group-item">Інструменти DevOps: Ansible, Terraform, GitLab CI/CD</li>
+          <li class="list-group-item">Тестування: PyTest, Jest, SoapUI</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="text-primary">Досвід роботи/Проєкти</h2>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Проєкт: Автоматизована система управління логістикою</h5>
+        <p class="card-text">
+          Розробив систему, яка дозволяє відстежувати та оптимізувати логістичні процеси компанії. 
+          Використав Django для бекенду та Angular для інтерфейсу користувача. Система допомогла 
+          зменшити витрати на логістику на 30%.
+        </p>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Проєкт: Платформа для моніторингу екологічних даних</h5>
+        <p class="card-text">
+          Розробив платформу, яка дозволяє відстежувати та аналізувати екологічні дані в реальному часі. 
+          Використані технології: Flask, PostgreSQL, Docker. Система допомогла знизити час на аналіз даних на 50%.
+        </p>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Особистий проєкт: Платформа для навчання програмуванню</h5>
+        <p class="card-text">
+          Розробив платформу, яка допомагає початківцям освоювати програмування через інтерактивні курси. 
+          Реалізовано функції інтеграції з GitHub, автоматичної перевірки коду, гейміфікації. 
+          Використані технології: FastAPI, Vue.js, MongoDB.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
